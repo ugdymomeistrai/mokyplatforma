@@ -50,9 +50,11 @@ export function useTeacherSession(code: string) {
         (payload) => {
           const newResponse = payload.new as Response;
           setResponses((prev) => [...prev, newResponse]);
-          setParticipantNames((prev) =>
-            new Set([...prev, newResponse.participant_name])
-          );
+          setParticipantNames((prev) => {
+            const next = new Set(Array.from(prev));
+            next.add(newResponse.participant_name);
+            return next;
+          });
         }
       )
       .on(
