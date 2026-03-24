@@ -161,7 +161,7 @@ function ActiveScreen({
           <div>
             <h2 className="text-2xl font-bold mb-6">{current.text}</h2>
             <div className="grid grid-cols-2 gap-3">
-              {current.options.map((opt: string, i: number) => (
+              {(current.options ?? []).map((opt: string, i: number) => (
                 <div key={i} className="bg-gray-700 rounded-lg px-4 py-3 font-medium">
                   {String.fromCharCode(65 + i)}) {opt}
                 </div>
@@ -174,9 +174,9 @@ function ActiveScreen({
       {/* Rezultatai (jei klausimas) */}
       {current?.type === "question" && (
         <ResultsChart
-          options={current.options}
+          options={current.options ?? []}
           answers={{}}
-          correct={current.correct}
+          correct={current.correct ?? 0}
         />
       )}
 
